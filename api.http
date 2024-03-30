@@ -5,5 +5,16 @@ GET http://localhost:1234/api
 GET http://localhost:1234/api/movies
 
 ### Buscar por id
-GET http://localhost:1234/api/movies/1e24b4c8a-a847-22484021677a
+GET http://localhost:1234/api/movies/1e24b789-4355-4c8a-a847-22484021677a
 
+### Crear pelicula
+POST http://localhost:1234/api/movies
+Content-Type: application/json
+
+{
+    "name": "Titanic",
+    "year": 2000,
+    "director": "James Cameron",
+    "cast": [ "Actor 1", "Actor 2" ],
+    "rating": 9
+}
