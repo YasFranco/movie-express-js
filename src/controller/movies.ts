@@ -2,6 +2,7 @@
 import MoviesModel from "../model/movies";
 import { Request, Response } from "express";
 import crypto from "node:crypto"
+import db from "../db/movies.json"
 
 
 abstract class MoviesController {
@@ -29,6 +30,33 @@ abstract class MoviesController {
 
         } 
         res.json(newMovie)
+    }
+
+    static updateMovie = (req: Request, res: Response) => {
+        // Recepcionar los datos y enviarselos al modelo.
+
+        // El parametro id viene en la url de la req
+        const { id } = req.params;
+        // El cuerpo de la req viene en el objeto req.body
+        // Destructuro las propiedades de req.body
+        const { name, year, director, cast, rating } = req.body
+
+        const objMovie = { id, name, year, director, cast, rating }
+        
+        const response = MoviesModel.updateMovie(objMovie)
+    
+        if(!response.message) {
+            res.status(400).json({error: "Error to update movie"})
+        }
+
+        res.json(response);
+    }
+
+    static deleteMovie = (req: Request, res: Response) => {
+        const { id } = req.params;
+        const response = MoviesModel.deleteMovie(id);
+
+        res.json(response)
     }
 }
 

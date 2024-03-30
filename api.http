@@ -18,3 +18,15 @@ Content-Type: application/json
     "cast": [ "Actor 1", "Actor 2" ],
     "rating": 9
 }
+
+### Actualizar pelicula
+PATCH http://localhost:1234/api/movies/3d3a2b36-6ad3-4a5f-8a5b-63d4f4c3a4d2
+Content-Type: application/json
+
+{
+    "name": "parasite",
+    "rating": 10
+}
+
+### Eliminar pelicula
+DELETE http://localhost:1234/api/movies/413725d9-0a21-4405-a064-b794c0a604d8
