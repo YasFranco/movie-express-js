@@ -12,11 +12,11 @@ POST http://localhost:1234/api/movies
 Content-Type: application/json
 
 {
-    "name": "Titanic",
-    "year": 2000,
+    "name": "Titanic6",
+    "year": 1980,
     "director": "James Cameron",
     "cast": [ "Actor 1", "Actor 2" ],
-    "rating": 9
+    "rating": 8
 }
 
 ### Actualizar pelicula

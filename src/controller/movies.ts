@@ -2,7 +2,9 @@
 import MoviesModel from "../model/movies";
 import { Request, Response } from "express";
 import crypto from "node:crypto"
-import db from "../db/movies.json"
+import zod from "zod"
+import { validateMovie } from "../validators/movies";
+
 
 
 abstract class MoviesController {
@@ -20,8 +22,13 @@ abstract class MoviesController {
     }
 
     static createMovie = (req: Request, res: Response) => {
+
+        const responseValidator = validateMovie(req.body)
+        if(!responseValidator.success){
+            return res.status(400).send(responseValidator.error)
+        }
         const { name, year, director, cast, rating } = req.body;
-        const id = crypto.randomUUID();
+        const id = crypto.randomUUID()
 
         const newMovie = { id, name, year,director, cast, rating}
         const response = MoviesModel.createMovie(newMovie)
@@ -33,6 +40,11 @@ abstract class MoviesController {
     }
 
     static updateMovie = (req: Request, res: Response) => {
+
+        const responsePartialValidator = validateMovie(req.body)
+        if(!responsePartialValidator.success){
+            return res.status(400).send(responsePartialValidator.error)
+        }
         // Recepcionar los datos y enviarselos al modelo.
 
         // El parametro id viene en la url de la req
